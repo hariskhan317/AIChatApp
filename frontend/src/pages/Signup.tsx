@@ -5,18 +5,28 @@ import {
   Grid,
   Button,
   Typography
-} from '@mui/material'  
+} from '@mui/material';
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Signup() {
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const auth = useAuth();
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get("userName") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    console.log('name', name);
-    console.log('email', email);
-    console.log('password', password);
+
+    try {
+      //toast.loading('Loading!');
+      await auth?.signup(name, email, password);
+      toast.success('User signed up successfully!');
+    } catch (error) {
+      console.log(error);
+      toast.error('Error signing up user!');
+    }
+
   }
   return (
     <Grid
@@ -26,7 +36,7 @@ export default function Signup() {
       alignItems="center"
       justifyContent="center"
       sx={{ minHeight: '100vh' }}>
-      <Paper sx={{width: 1/3, marginTop:'100px'}} elevation={3}>
+      <Paper sx={{ width: 1 / 3, marginTop: '100px' }} elevation={3}>
         <form onSubmit={handleSubmit}>
           <Box
             component="div"
@@ -73,9 +83,9 @@ export default function Signup() {
                 variant="outlined" /> 
             </Box>
 
-            <Button sx={{ width: '100%', marginTop: '30px' }} type="submit" variant="contained" size="large">Login</Button>
+            <Button sx={{ width: '100%', marginTop: '30px' }} type="submit" variant="contained" size="large">Sign in</Button>
           </Box>
-        </form>
+        </form> 
       </Paper>
     </Grid>
   )

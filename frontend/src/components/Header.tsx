@@ -6,7 +6,7 @@ import {
   Typography,
   Button
 } from '@mui/material';
-import NavigationLink from './NavigationLink';
+import NavigationLink from './SharedComponents/NavigationLink';
 import {useAuth} from '../context/AuthContext'
 
 export default function Header() { 

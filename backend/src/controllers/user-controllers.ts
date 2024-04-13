@@ -15,12 +15,19 @@ export const getAllUser = async(req,res) => {
 
 export const signupUser = async (req, res) => {
     try {
-        const { name, email, password } = await User.create(req.body);
+        const { name, email, password } = req.body;
         const existingUser = await User.findOne({ email })
         if (existingUser) return res.status(401).send("User already registered");
-        const hashedPassword = hash(password, 10);
+        const hashedPassword = await hash(password, 10);
         const user = new User({name, email, password: hashedPassword})
-        user.save();
+        await user.save();
+
+        res.clearCookie(COOKIE_NAME, {
+            path: '/',
+            domain: 'localhost',
+            signed: true,
+            httpOnly: true,
+        }) 
 
         const token = createToken(user._id.toString(), user.email, "7d");        
         const expires = new Date();
@@ -33,7 +40,7 @@ export const signupUser = async (req, res) => {
             httpOnly: true,
         })
 
-        return res.status(201).json({ message: "ok", name: user.name, email: user.email, password: user.password });
+        return res.status(201).json({ message: "ok", name: user.name, email: user.email });
 
     } catch (error) {
         console.log(error);
@@ -74,5 +81,21 @@ export const loginUser = async(req, res) => {
     } catch (error) {
         console.log(error);
         return res.status(200).send({ message: "Error", cause: error.message });
+    }
+}
+
+export const verifyUser = async (req, res) => {
+    try {
+        const user = await User.findById(res.locals.jwtData.id);
+        if (!user) {
+            return res.status(401).send("Permissions didn't match");
+        }
+        if (user._id.toString() !== res.locals.jwtData.id) {
+            return res.status(401).send("Permissions didn't match");
+        }
+        res.status(200).json({ message: "OK", name: user.name, email: user.email });
+    } catch (error) {
+        console.log(error.message)
+        res.status(200).json({message: "ERROR", cause: error.message})
     }
 }

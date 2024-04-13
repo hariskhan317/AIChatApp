@@ -6,10 +6,25 @@ import {
   Button,
   Typography
 } from '@mui/material' 
-
+import { toast } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
 export default function Login() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const auth = useAuth();
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    console.log({ email })
+    console.log({password})
+    try {
+      //toast.loading("Loading")
+      await auth?.login(email, password);
+      toast.success('User signed up successfully!');
+    } catch (error) {
+      console.log(error);
+      toast.error('Signing In Failded!');
+    }
   }
 
   return (
@@ -23,43 +38,37 @@ export default function Login() {
       <Paper sx={{width: 1/3, marginTop:'100px'}} elevation={3}>
         <form onSubmit={handleSubmit}>
           <Box
-            component="form"
-            sx={{
-              padding: '40px 50px',
-              '& > *': {
-                marginBottom: '40px' // Adding marginBottom to each direct child element
-              }
-            }}
-            noValidate
-            autoComplete="off"
+            component="div"
+            style={{
+              padding: '40px 50px', 
+            }} 
           >
             <Box> 
               <Typography variant='h4' sx={{textAlign:'center', color: '#1976d2', fontWeight:'600'}}>INTELLECTRA</Typography>
             </Box>
             <Box>
-              <TextField
+            <TextField
                 required
-                sx={{ width: '100%' }}
-                id="outlined-basic"
+                name="email"
+                sx={{ width: '100%', marginTop: '30px' }} 
                 label="Email"
                 type="email"
                 variant="outlined"
               /> 
             </Box>
             <Box>
-              <TextField
+            <TextField
                 required
-                sx={{ width: '100%' }}
-                id="outlined-basic"
+                name="password"
+                sx={{ width: '100%', marginTop: '30px'  }} 
                 label="Password"
                 type="password"
-                variant="outlined"
-              /> 
+                variant="outlined" /> 
             </Box>
 
-            <Button variant="contained" size="large">Signup</Button>
+            <Button type="submit" sx={{ width: '100%', marginTop: '30px'  }} variant="contained" size="large">login</Button>
           </Box>
-        </form>
+        </form> 
       </Paper>
     </Grid>
   )
