@@ -14,7 +14,7 @@ app.use(cors({
   }));
   
   app.use(cors({
-    origin: ["https://ai-chat-app-uam3.vercel.app", ""],
+    origin: ["https://ai-chat-app-frontend.vercel.app", ""],
     methods: "any",
     credentials: true
 }));
