@@ -8,14 +8,7 @@ config();
 const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json())
-app.use(cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true
-}));
-
+app.use(cors( { origin: 'https://ai-chat-app-wmwf.vercel.app', credentials: true  }));
 
 //will not work in production
 app.use(morgan("dev"));
