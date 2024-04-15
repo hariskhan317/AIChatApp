@@ -15,7 +15,7 @@ const theme = createTheme({
   },
 })
 
-axios.defaults.baseURL = "http://localhost:8000/api/v1";
+axios.defaults.baseURL = "https://ai-chat-app-pi.vercel.app/api/v1";
 axios.defaults.withCredentials = true
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
