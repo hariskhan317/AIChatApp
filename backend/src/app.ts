@@ -7,8 +7,13 @@ import cors from 'cors';
 config();
 const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.json())
-app.use(cors( { origin: 'https://ai-chat-app-wmwf.vercel.app', credentials: true  }));
+app.use(express.json()) 
+
+app.use(cors({
+    origin: ["https://ai-chat-app-wmwf.vercel.app"],
+    methods: "any",
+    credentials: true
+}));
 
 //will not work in production
 app.use(morgan("dev"));
