@@ -8,15 +8,18 @@ import {
 } from '@mui/material' 
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 export default function Login() {
   const auth = useAuth();
+  const navigate = useNavigate()
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    console.log({ email })
-    console.log({password})
+
     try {
       //toast.loading("Loading")
       await auth?.login(email, password);
@@ -24,8 +27,15 @@ export default function Login() {
     } catch (error) {
       console.log(error);
       toast.error('Signing In Failded!');
-    }
+    } 
   }
+
+  useEffect(() => {
+    if (auth?.user) {
+      return navigate("/");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return (
     <Grid

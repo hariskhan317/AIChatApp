@@ -9,8 +9,13 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 export default function Signup() {
   const auth = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -26,8 +31,16 @@ export default function Signup() {
       console.log(error);
       toast.error('Error signing up user!');
     }
-
   }
+
+  useEffect(() => {
+    if (auth?.user) {
+      return navigate("/");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
+
+
   return (
     <Grid
       container

@@ -9,7 +9,11 @@ import {
 import NavigationLink from './SharedComponents/NavigationLink';
 import {useAuth} from '../context/AuthContext'
 
-export default function Header() { 
+interface HeaderProps {
+  handleLogout: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({handleLogout}) => { 
   const auth = useAuth();
 
   return (
@@ -21,16 +25,18 @@ export default function Header() {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            <NavigationLink pathName={"/"} name={"INTELLECTRA"} />
+          > 
+            <Typography style={{
+              color: 'white',
+              fontSize: '18px',
+              fontWeight: '600',
+              textDecoration: 'none'
+            }}>INTELLECTRA</Typography>
           </Typography>
           <Box style={{ display: 'flex', gap: '40px' }}>
             {auth?.isLoggedIn ? (
               <>
-                <Box sx={{marginTop:'6px'}}> 
-                  <NavigationLink pathName={"/chat"} name={"chat"} />
-                </Box>
-                <Button sx={{ background:'transparent', border:'1px solid #fff', padding: '7px 25px', color: '#fff'}} >Logout</Button>
+                <Button onClick={handleLogout} sx={{ background:'transparent', border:'1px solid #fff', padding: '7px 25px', color: '#fff'}} >Logout</Button>
               </>
             ) : (
                 <>
@@ -44,3 +50,4 @@ export default function Header() {
     </Box>
   );
 }
+export default Header;

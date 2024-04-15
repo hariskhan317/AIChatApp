@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import {signupUser, LoginUser, checkAuthStatus} from '../helpers/api-communicator'
+import { signupUser, LoginUser, checkAuthStatus, logoutUser } from '../helpers/api-communicator';
 type User = {
     name: string,
     email: string,
@@ -18,7 +18,7 @@ const AuthContext = createContext<userAuth | null>(null);
 // now we need to create a provider for the context which wrap all the childrens     
 export const AuthProvider = ({ children } : {children:ReactNode}) => {
     const [user, setUser] = useState<User | null>(null);
-    const [isLoggedIn, setIsLoggedIn ] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         //Fetch if user's cookies are valid then skip login
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children } : {children:ReactNode}) => {
             }
         }
         checkStatus();
-    })
+    },[])
 
     const login = async(email: string, password: string) => { 
         const data = await LoginUser(email, password);
@@ -48,7 +48,12 @@ export const AuthProvider = ({ children } : {children:ReactNode}) => {
             console.log(isLoggedIn)
         }
     }
-    const logout = async(): Promise<void> =>{}
+    const logout = async (): Promise<void> => {
+        await logoutUser();
+        setIsLoggedIn(false);
+        setUser(null);
+        window.location.href = '/login';
+    }
 
     const value = {
         user, 
@@ -62,4 +67,5 @@ export const AuthProvider = ({ children } : {children:ReactNode}) => {
 
 } 
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);

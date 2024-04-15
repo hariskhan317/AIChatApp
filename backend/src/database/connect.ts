@@ -7,7 +7,6 @@ async function connectToDatabase() {
         console.log(err);
         console.log('Could not connect to DB')
     }
-
 }
 
 async function disconnectToDatabase() {
