@@ -9,12 +9,13 @@ const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json()) 
 
-app.use(cors({
-    origin: ["https://ai-chat-app-wmwf.vercel.app"],
-    methods: "any",
-    credentials: true
-}));
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://ai-chat-app-wmwf.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
 //will not work in production
 app.use(morgan("dev"));
 
