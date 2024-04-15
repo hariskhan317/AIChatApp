@@ -9,10 +9,15 @@ const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json())
 app.use(cors({
-    origin: 'https://ai-chat-app-uam3.vercel.app',
+    origin: '',
     credentials: true // Allow cookies to be sent cross-origin
   }));
   
+  app.use(cors({
+    origin: ["https://ai-chat-app-uam3.vercel.app/login"],
+    methods: "any",
+    credentials: true
+}));
 
 //will not work in production
 app.use(morgan("dev"));
