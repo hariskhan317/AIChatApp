@@ -59,8 +59,8 @@ export default function Chat() {
       <Grid item xs={9}>
         <Paper sx={{ padding: '25px 20px', textAlign: 'center' }} elevation={3}>
           <Box sx={{height: '51vh', overflowY: 'scroll'}}>
-          {chatMessages.map((chatMessage) => (
-              <ChatItem content={chatMessage.content} role={chatMessage.role} />
+          {chatMessages.map((chatMessage, index) => (
+              <ChatItem key={index} content={chatMessage.content} role={chatMessage.role} />
           ))}
           </Box>
           <Box sx={{position: 'relative', width: '100%', }}>

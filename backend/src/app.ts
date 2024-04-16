@@ -14,9 +14,9 @@ app.use(cors({
   }));
   
   app.use(cors({
-    origin: 'https://ai-chat-app-frontend.vercel.app', // Allow requests from frontend origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    credentials: true // Allow cookies to be sent cross-origin
+    origin: ["http://localhost:5173"],
+    methods: "any",
+    credentials: true
 }));
 
 //will not work in production

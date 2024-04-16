@@ -24,7 +24,7 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'ai-chat-app-frontend.vercel.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
         }) 
@@ -34,7 +34,7 @@ export const signupUser = async (req, res) => {
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'ai-chat-app-frontend.vercel.app',
+            domain: 'localhost',
             expires,
             signed: true,
             httpOnly: true,
@@ -62,7 +62,7 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'ai-chat-app-frontend.vercel.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
         }) 
@@ -72,7 +72,7 @@ export const loginUser = async(req, res) => {
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'ai-chat-app-frontend.vercel.app',
+            domain: 'localhost',
             httpOnly: true,
             signed: true,
             expires,
@@ -112,7 +112,7 @@ export const userLogout = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'ai-chat-app-frontend.vercel.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
         })
