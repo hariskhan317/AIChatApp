@@ -24,9 +24,10 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
             signed: true,
             httpOnly: true,
+            secure: true
         }) 
 
         const token = createToken(user._id.toString(), user.email, "7d");        
@@ -34,10 +35,10 @@ export const signupUser = async (req, res) => {
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
-            expires,
+            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
             signed: true,
             httpOnly: true,
+            secure: true
         })
 
         return res.status(201).json({ message: "ok", name: user.name, email: user.email });
@@ -62,9 +63,10 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
             signed: true,
             httpOnly: true,
+            secure: true
         }) 
 
         const token = createToken(user._id.toString(), user.email, "7d");
@@ -72,10 +74,10 @@ export const loginUser = async(req, res) => {
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
-            httpOnly: true,
+            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
             signed: true,
-            expires,
+            httpOnly: true,
+            secure: true
         })
         return res.status(200).json({message: 'ok', name: user.name, email: user.email})
     } catch (error) {
@@ -112,9 +114,10 @@ export const userLogout = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
             signed: true,
             httpOnly: true,
+            secure: true
         })
         return res
         .status(200)
