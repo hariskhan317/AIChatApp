@@ -24,9 +24,9 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: 'https://ai-chat-app-frontend.vercel.app',
             signed: true,
-            httpOnly: true,
+            httpsOnly: true,
         }) 
 
         const token = createToken(user._id.toString(), user.email, "7d");        
@@ -34,10 +34,10 @@ export const signupUser = async (req, res) => {
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
+            domain: 'https://ai-chat-app-frontend.vercel.app',
             expires,
             signed: true,
-            httpOnly: true,
+            httpsOnly: true,
         })
 
         return res.status(201).json({ message: "ok", name: user.name, email: user.email });
@@ -62,9 +62,9 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: 'https://ai-chat-app-frontend.vercel.app',
             signed: true,
-            httpOnly: true,
+            httpsOnly: true,
         }) 
 
         const token = createToken(user._id.toString(), user.email, "7d");
@@ -72,8 +72,8 @@ export const loginUser = async(req, res) => {
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
-            httpOnly: true,
+            domain: 'https://ai-chat-app-frontend.vercel.app',
+            httpsOnly: true,
             signed: true,
             expires,
         })
@@ -112,9 +112,9 @@ export const userLogout = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: 'https://ai-chat-app-frontend.vercel.app',
             signed: true,
-            httpOnly: true,
+            httpsOnly: true,
         })
         return res
         .status(200)
