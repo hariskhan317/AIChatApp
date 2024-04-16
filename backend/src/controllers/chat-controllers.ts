@@ -1,7 +1,7 @@
 import { configureOpenAi } from '../config/openai-config.js';
 import { Request, Response, NextFunction } from 'express';
 import User from '../models/users.js';
-import { ChatCompletionRequestMessage, OpenAIApi } from 'openai';
+import { ChatCompletionRequestMessage, OpenAIApi, ChatCompletionRequestMessageRoleEnum } from 'openai';
 
 export const generateOpenAiChat = async (req: Request, res: Response, next: NextFunction) => {
     const { message } = req.body;
@@ -72,6 +72,7 @@ export const deleteChats = async (req: Request, res: Response, next: NextFunctio
         if (user._id.toString() !== res.locals.jwtData.id) {
             return res.status(401).send("Permissions didn't match");
         }
+        
         user.chats = [];
         await user.save();
         return res.status(200).json({message: "OK"})

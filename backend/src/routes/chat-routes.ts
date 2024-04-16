@@ -5,10 +5,10 @@ import { generateOpenAiChat, sendChatsToUser, deleteChats } from '../controllers
 
 const chatRoutes = Router();
 
-chatRoutes.post("/new", validate(chatValidator), generateOpenAiChat)
+chatRoutes.post("/new", validate(chatValidator), verifyToken, generateOpenAiChat)
 
-chatRoutes.get("/all-chats", sendChatsToUser)
+chatRoutes.get("/all-chats", verifyToken, sendChatsToUser)
 
-chatRoutes.delete("/delete", deleteChats)
+chatRoutes.delete("/delete", verifyToken, deleteChats)
 
 export default chatRoutes;
