@@ -15,7 +15,7 @@ const theme = createTheme({
   },
 })
 
-axios.defaults.baseURL = "https://aichatapp-9edf.onrender.com/api/v1";
+axios.defaults.baseURL = "http://localhost:8000/api/v1";
 axios.defaults.withCredentials = true
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

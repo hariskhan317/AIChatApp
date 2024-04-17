@@ -24,7 +24,7 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
             secure: true
@@ -35,7 +35,7 @@ export const signupUser = async (req, res) => {
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
             secure: true
@@ -63,7 +63,7 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
             secure: true
@@ -74,7 +74,7 @@ export const loginUser = async(req, res) => {
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
             secure: true
@@ -114,7 +114,7 @@ export const userLogout = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: '661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app',
+            domain: 'localhost',
             signed: true,
             httpOnly: true,
             secure: true

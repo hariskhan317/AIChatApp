@@ -10,7 +10,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json())
   
   app.use(cors({
-    origin: ["https://661eebf17b102684d90026a1--splendid-dodol-ed9c09.netlify.app"],
+    origin: ["http://localhost:5173"],
     methods: "any",
     credentials: true
 }));
