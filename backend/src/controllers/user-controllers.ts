@@ -24,7 +24,7 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: 'intellectra.netlify.app',
             signed: true,
             httpOnly: true,
             secure: true
@@ -35,7 +35,7 @@ export const signupUser = async (req, res) => {
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
+            domain: 'intellectra.netlify.app',
             signed: true,
             httpOnly: true,
             secure: true
@@ -63,7 +63,7 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             path: '/',
-            domain: 'localhost',
+            domain: 'intellectra.netlify.app',
             signed: true,
             httpOnly: true,
             secure: true
@@ -74,7 +74,7 @@ export const loginUser = async(req, res) => {
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
             path: '/',
-            domain: 'localhost',
+            domain: 'intellectra.netlify.app',
             signed: true,
             httpOnly: true,
             secure: true
@@ -112,9 +112,9 @@ export const userLogout = async (req, res) => {
             return res.status(401).send("Permissions didn't match");
         }
 
-        res.clearCookie(COOKIE_NAME, {
+        res.clearCookie(COOKIE_NAME,{
             path: '/',
-            domain: 'localhost',
+            domain: 'intellectra.netlify.app',
             signed: true,
             httpOnly: true,
             secure: true
