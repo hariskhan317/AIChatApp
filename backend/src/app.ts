@@ -10,7 +10,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json())
   
   app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://ai-chat-app-frontent.vercel.app"],
     methods: "any",
     credentials: true
 }));
