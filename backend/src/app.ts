@@ -9,10 +9,16 @@ const app = express();
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json())
   
-  app.use(cors({
-    origin: ["http://localhost:5173"],
-    methods: "any",
-    credentials: true
+//   app.use(cors({
+//     origin: ["http://localhost:5173"],
+//     methods: "any",
+//     credentials: true
+// }));
+
+app.use(cors({
+  origin: ["https://ai-chat-app-liart.vercel.app"],
+  methods: "any",
+  credentials: true
 }));
 
 //will not work in production
