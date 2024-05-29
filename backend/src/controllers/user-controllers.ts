@@ -24,8 +24,8 @@ export const signupUser = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             httpOnly: true, 
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'None', 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None', 
         }) 
 
         const token = createToken(user._id.toString(), user.email);        
@@ -34,8 +34,8 @@ export const signupUser = async (req, res) => {
         res.cookie(COOKIE_NAME, token, {
             expires,
             httpOnly: true, 
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'None', 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None', 
         })
 
         return res.status(201).json({ message: "ok", name: user.name, email: user.email });
@@ -60,8 +60,8 @@ export const loginUser = async(req, res) => {
 
         res.clearCookie(COOKIE_NAME, {
             httpOnly: true, 
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'None', 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None', 
         }) 
 
         const token = createToken(user._id.toString(), user.email);
@@ -70,8 +70,8 @@ export const loginUser = async(req, res) => {
         res.cookie(COOKIE_NAME, token, {
             expires,
             httpOnly: true, 
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'None', 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None', 
         })
         return res.status(200).json({message: 'ok', name: user.name, email: user.email})
     } catch (error) {
@@ -108,8 +108,8 @@ export const userLogout = async (req, res) => {
 
         res.clearCookie(COOKIE_NAME,{
             httpOnly: true, 
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: 'None', 
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'None', 
         })
         return res
         .status(200)
