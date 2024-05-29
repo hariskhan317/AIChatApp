@@ -23,22 +23,19 @@ export const signupUser = async (req, res) => {
         await user.save();
 
         res.clearCookie(COOKIE_NAME, {
-            path: '/',
-            domain: 'intellectra.netlify.app',
-            signed: true,
-            httpOnly: true,
-            secure: true
+            httpOnly: true, 
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'None', 
         }) 
 
-        const token = createToken(user._id.toString(), user.email, "7d");        
+        const token = createToken(user._id.toString(), user.email);        
         const expires = new Date();
         expires.setDate(expires.getDate() * 7);
         res.cookie(COOKIE_NAME, token, {
-            path: '/',
-            domain: 'intellectra.netlify.app',
-            signed: true,
-            httpOnly: true,
-            secure: true
+            expires,
+            httpOnly: true, 
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'None', 
         })
 
         return res.status(201).json({ message: "ok", name: user.name, email: user.email });
@@ -62,22 +59,19 @@ export const loginUser = async(req, res) => {
         }
 
         res.clearCookie(COOKIE_NAME, {
-            path: '/',
-            domain: 'intellectra.netlify.app',
-            signed: true,
-            httpOnly: true,
-            secure: true
+            httpOnly: true, 
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'None', 
         }) 
 
-        const token = createToken(user._id.toString(), user.email, "7d");
+        const token = createToken(user._id.toString(), user.email);
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
-            path: '/',
-            domain: 'intellectra.netlify.app',
-            signed: true,
-            httpOnly: true,
-            secure: true
+            expires,
+            httpOnly: true, 
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'None', 
         })
         return res.status(200).json({message: 'ok', name: user.name, email: user.email})
     } catch (error) {
@@ -113,11 +107,9 @@ export const userLogout = async (req, res) => {
         }
 
         res.clearCookie(COOKIE_NAME,{
-            path: '/',
-            domain: 'intellectra.netlify.app',
-            signed: true,
-            httpOnly: true,
-            secure: true
+            httpOnly: true, 
+            // secure: process.env.NODE_ENV === 'production',
+            // sameSite: 'None', 
         })
         return res
         .status(200)
